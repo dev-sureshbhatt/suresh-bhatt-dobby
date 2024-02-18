@@ -41,6 +41,8 @@ app.get('/', (req,res)=>{
 })
 
 
+
+//User Register endpoint
 app.post('/register', async (req,res)=>{
 
     try {
@@ -64,6 +66,8 @@ app.post('/register', async (req,res)=>{
 })
 
 
+
+//User Login endpoint
 app.post('/login', async (req,res)=>{
     try {
         //fetching user
@@ -93,3 +97,9 @@ app.post('/login', async (req,res)=>{
     }
     
 })
+
+
+//Logout - invalidating cookies
+app.get('/logout', (req,res)=>{
+    res.status(200).clearCookie("token").json({"msg":"You've been logged out successfully"})
+}) 
