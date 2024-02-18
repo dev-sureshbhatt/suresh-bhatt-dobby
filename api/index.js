@@ -41,6 +41,7 @@ app.get('/', (req,res)=>{
 
 app.post('/user', async (req,res)=>{
 
+    try {
     //hashing password without storing user password in the server
     const salt = bcrypt.genSaltSync(10)
     const hashedPassword = bcrypt.hashSync(req.body.password, salt)
@@ -51,6 +52,11 @@ app.post('/user', async (req,res)=>{
         password: hashedPassword
     })
 
+    res.status(200).json(userDoc)        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({"msg":"something went wrong"})
+        
+    }
 
-    res.send(userDoc)
 })
