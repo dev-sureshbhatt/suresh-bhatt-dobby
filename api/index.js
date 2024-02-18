@@ -121,5 +121,34 @@ app.get('/logout', (req,res)=>{
 //endpoint for file uploads
 
 app.post('/upload', upload.array('files'), (req,res)=>{
-    console.log(req.body, req.files, req.file)
+
+
+    try {
+
+        
+        
+        // console.log(req.files.length)
+
+        // for (let i = 0; i < files.length; i++) {
+        //     const path[]
+        // }
+
+        const path = req.files[0].path
+        const title = req.files[0].originalname
+        
+        // console.log(path, title)
+    
+    
+    
+        // console.log(req.files[0].path)
+        // console.log(req.files[0].originalname)
+    
+    
+        
+    } catch (error) {
+        console.log(error)
+       res.status(500).json({"msg":"something went wrong"}) 
+    }
+   
+    
 })

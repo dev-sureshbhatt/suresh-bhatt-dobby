@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 
 function UploadImage() {
 
-    const [files, setFiles] = useState([])
+const [files, setFiles] = useState([])
+const [uploadedImages, setUploadedImages] = useState([])
 
 function handleSubmit(ev){
     ev.preventDefault()
+    setUploadedImages(files)
 
 
     const data = new FormData
@@ -30,8 +32,10 @@ function handleSubmit(ev){
         <input 
           type='file'
           multiple
+          required
           onChange={(ev)=>{setFiles(ev.target.files)}}></input>
         <button>Upload Images</button>
+
     </form>
   )
 }
