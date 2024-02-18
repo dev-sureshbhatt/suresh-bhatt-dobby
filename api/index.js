@@ -7,10 +7,19 @@ const jwt = require('jsonwebtoken')
 const cors = require('cors')
 
 
-const app = express()
+//dotenv variables
 const PORT = process.env.PORT || 4000
 const MONGO_STRING = process.env.MONGO_STRING
 const JWT_SECRET = process.env.JWT_SECRET
+
+//for file upload
+const multer = require('multer') 
+const upload = multer({dest: 'uploads/'})
+
+
+//server initialization
+const app = express()
+
 
 
 
@@ -18,6 +27,7 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 app.use(express.json())
 app.use(cors())
+app.use(express.urlencoded({extended:false}))
 
 
 
@@ -106,3 +116,10 @@ app.post('/login', async (req,res)=>{
 app.get('/logout', (req,res)=>{
     res.status(200).clearCookie("token").json({"msg":"You've been logged out successfully"})
 }) 
+
+
+//endpoint for file uploads
+
+app.post('/upload', upload.array('files'), (req,res)=>{
+    console.log(req.body, req.files, req.file)
+})
