@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 require('dotenv').config()
-const USER = require('./models/userModel')
+const {USER} = require('./models/userModel.js')
 const bcrypt = require('bcryptjs')
 
 
@@ -39,20 +39,18 @@ app.get('/', (req,res)=>{
 })
 
 
-app.post('/user', (req,res)=>{
-    const {email, password} = req.body
-    //password hashing
+app.post('/user', async (req,res)=>{
+
+    //hashing password without storing user password in the server
     const salt = bcrypt.genSaltSync(10)
     const hashedPassword = bcrypt.hashSync(req.body.password, salt)
-    console.log(hashedPassword)
-    res.send("hi")
+    
+    //storing this hashed password with email in db
+    const userDoc = await USER.create({
+        email:req.body.email,
+        password: hashedPassword
+    })
+
+
+    res.send(userDoc)
 })
-
-
-
-
-
-
-
-
-
