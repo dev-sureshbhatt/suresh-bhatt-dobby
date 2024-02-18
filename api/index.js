@@ -82,9 +82,10 @@ app.post('/login', async (req,res)=>{
             
 
         }
+        else res.cookie("token", "").status(400).json({"msg":"invalid credentials"})
         }       
         
-         else res.cookie("token", "").status(400).json({"msg":"invalid credentials"})
+        
         
     } catch (error) {
         console.log(error)
