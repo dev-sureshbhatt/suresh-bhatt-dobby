@@ -4,6 +4,7 @@ require('dotenv').config()
 const {USER} = require('./models/userModel.js')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const cors = require('cors')
 
 
 const app = express()
@@ -12,9 +13,11 @@ const MONGO_STRING = process.env.MONGO_STRING
 const JWT_SECRET = process.env.JWT_SECRET
 
 
+
 //middlewares
 
 app.use(express.json())
+app.use(cors())
 
 
 
@@ -56,7 +59,7 @@ app.post('/register', async (req,res)=>{
         password: hashedPassword
     })
 
-    res.status(200).json(userDoc)        
+    res.status(200).json({"msg":"User Created"})        
     } catch (error) {
         console.log(error)
         res.status(500).json({"msg":"something went wrong"})

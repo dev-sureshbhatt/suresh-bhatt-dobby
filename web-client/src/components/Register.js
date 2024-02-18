@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 
-function Login() {
+function Register() {
 
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 
 function handleSubmit(ev){
     ev.preventDefault()
-    
-    fetch('http://localhost:4000/login', {
+    fetch('http://localhost:4000/register', {
         method: 'POST',
         body: JSON.stringify({email, password}),
         headers: {'Content-Type':'application/json'}
@@ -18,22 +17,20 @@ function handleSubmit(ev){
     }).catch((error)=>{
         alert("something went wrong")
     })
-
-
-
-
+    
 }
+
 
   return (
 
     <div>
         <form onSubmit={handleSubmit}>
-            <input type='email' placeholder='email' value={email} onChange={(ev)=>setEmail(ev.target.value)} />
-            <input type='password' placeholder='password' value={password} onChange={(ev)=>setPassword(ev.target.value)} />
-            <button>Login</button>
+            <input required type='email' placeholder='email' value={email} onChange={(ev)=>setEmail(ev.target.value)} />
+            <input required type='password' placeholder='password' value={password} onChange={(ev)=>setPassword(ev.target.value)} />
+            <button>Register</button>
         </form>
     </div>
   )
 }
 
-export default Login
+export default Register
