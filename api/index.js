@@ -133,18 +133,22 @@ app.post('/upload', upload.array('files'), async (req,res)=>{
         
         // console.log(req.files.length)
 
+        const files = req.files
         // for (let i = 0; i < files.length; i++) {
         //     const path[]
         // }
 
-        const path = req.files[0].path
-        const title = req.files[0].originalname
+        for (let i = 0; i < files.length; i++)
+        {
+        const path = req.files[i].path
+        const title = req.files[i].originalname
 
-        const imageDoc = await IMAGE.create({
+        await IMAGE.create({
             path, title
         })
+    }
 
-        res.json(imageDoc)
+        
         
         // console.log(path, title)
     
