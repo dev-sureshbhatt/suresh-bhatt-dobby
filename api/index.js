@@ -39,7 +39,7 @@ app.get('/', (req,res)=>{
 })
 
 
-app.post('/user', async (req,res)=>{
+app.post('/register', async (req,res)=>{
 
     try {
     //hashing password without storing user password in the server
@@ -59,4 +59,22 @@ app.post('/user', async (req,res)=>{
         
     }
 
+})
+
+
+app.post('/login', async (req,res)=>{
+    try {
+        //fetching user
+        const userDoc = await USER.findOne({email:req.body.email})
+        console.log(userDoc)
+        //verifying hash
+        const isValidUser = bcrypt.compareSync(req.body.password, userDoc.password)
+        console.log(isValidUser)
+        
+        res.send("hi")    
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({"msg":"something went wrong"})
+    }
+    
 })
