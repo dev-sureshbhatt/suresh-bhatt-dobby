@@ -3,11 +3,13 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const {USER} = require('./models/userModel.js')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 
 const app = express()
 const PORT = process.env.PORT || 4000
 const MONGO_STRING = process.env.MONGO_STRING
+const JWT_SECRET = process.env.JWT_SECRET
 
 
 //middlewares
@@ -66,12 +68,24 @@ app.post('/login', async (req,res)=>{
     try {
         //fetching user
         const userDoc = await USER.findOne({email:req.body.email})
-        console.log(userDoc)
-        //verifying hash
-        const isValidUser = bcrypt.compareSync(req.body.password, userDoc.password)
-        console.log(isValidUser)
         
-        res.send("hi")    
+        if (!userDoc){
+            res.status(400).cookie("token", "").json({"msg":"no user exist"})
+        }
+        else if (userDoc){
+            //verifying hash
+        const isValidUser = bcrypt.compareSync(req.body.password, userDoc.password)
+        if (isValidUser) {
+            //signing jwt & issuing token cookie
+            const token = jwt.sign({email:userDoc.email}, JWT_SECRET,{})
+            res.status(200).cookie("token", token).json({"msg":"User valid and token issued"})
+            
+
+        }
+        }       
+        
+         else res.cookie("token", "").status(400).json({"msg":"invalid credentials"})
+        
     } catch (error) {
         console.log(error)
         res.status(500).json({"msg":"something went wrong"})
