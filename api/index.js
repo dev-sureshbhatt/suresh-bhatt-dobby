@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 require('dotenv').config()
 const USER = require('./models/userModel')
+const bcrypt = require('bcryptjs')
 
 
 const app = express()
@@ -39,7 +40,11 @@ app.get('/', (req,res)=>{
 
 
 app.post('/user', (req,res)=>{
-    console.log(req.body)
+    const {email, password} = req.body
+    //password hashing
+    const salt = bcrypt.genSaltSync(10)
+    const hashedPassword = bcrypt.hashSync(req.body.password, salt)
+    console.log(hashedPassword)
     res.send("hi")
 })
 
