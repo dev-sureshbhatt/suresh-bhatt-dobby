@@ -1,7 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
 require('dotenv').config()
+
+//models
 const {USER} = require('./models/userModel.js')
+const {IMAGE} = require('./models/imageModel.js') 
+
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
@@ -120,7 +124,7 @@ app.get('/logout', (req,res)=>{
 
 //endpoint for file uploads
 
-app.post('/upload', upload.array('files'), (req,res)=>{
+app.post('/upload', upload.array('files'), async (req,res)=>{
 
 
     try {
@@ -135,6 +139,12 @@ app.post('/upload', upload.array('files'), (req,res)=>{
 
         const path = req.files[0].path
         const title = req.files[0].originalname
+
+        const imageDoc = await IMAGE.create({
+            path, title
+        })
+
+        res.json(imageDoc)
         
         // console.log(path, title)
     
