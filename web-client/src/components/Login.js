@@ -11,6 +11,7 @@ function handleSubmit(ev){
     fetch('http://localhost:4000/login', {
         method: 'POST',
         body: JSON.stringify({email, password}),
+        credentials: 'include',
         headers: {'Content-Type':'application/json'}
     }).then((response)=>{
         response.json().then((msg)=>alert(msg.msg)).catch(err => alert("something went wrong"))

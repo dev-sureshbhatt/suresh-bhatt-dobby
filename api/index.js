@@ -8,7 +8,10 @@ const {IMAGE} = require('./models/imageModel.js')
 
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+
+//for parsing data
 const cors = require('cors')
+const cookieParser = require('cookie-parser') // to parse cookie send via useEffect hook mounted in header for user authentication 
 
 
 //dotenv variables
@@ -30,8 +33,9 @@ const app = express()
 //middlewares
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({credentials: true, origin:'http://localhost:3000'}))
 app.use(express.urlencoded({extended:false}))
+app.use(cookieParser())
 
 
 
@@ -99,7 +103,7 @@ app.post('/login', async (req,res)=>{
         if (isValidUser) {
             //signing jwt & issuing token cookie
             const token = jwt.sign({email:userDoc.email}, JWT_SECRET,{})
-            res.status(200).cookie("token", token).json({"msg":"User valid and token issued"})
+            res.cookie("token", token).status(200).json({"msg":"User valid and token issued"})
             
 
         }
@@ -166,3 +170,12 @@ app.post('/upload', upload.array('files'), async (req,res)=>{
    
     
 })
+
+
+//endpoint for profile authentication .
+
+app.get('/profile', (req,res)=>{
+    console.log("cookies are", req.cookies)
+    res.json({"msg": "ok"})
+})
+
