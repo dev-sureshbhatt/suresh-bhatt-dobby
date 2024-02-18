@@ -7,5 +7,4 @@ const userSchema = mongoose.Schema({
 })
 
 
-
 const USER = new mongoose.model('user', userSchema)

@@ -3,9 +3,21 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const USER = require('./models/userModel')
 
+
 const app = express()
 const PORT = process.env.PORT || 4000
 const MONGO_STRING = process.env.MONGO_STRING
+
+
+//middlewares
+
+app.use(express.json())
+
+
+
+///
+
+
 
 app.listen(PORT, ()=>{
     console.log(`App Listening at PORT ${PORT}`)
@@ -23,6 +35,12 @@ mongoose.connect(MONGO_STRING)
 
 app.get('/', (req,res)=>{
     res.send("testing")
+})
+
+
+app.post('/user', (req,res)=>{
+    console.log(req.body)
+    res.send("hi")
 })
 
 
