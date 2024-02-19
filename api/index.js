@@ -102,7 +102,7 @@ app.post('/login', async (req,res)=>{
         const isValidUser = bcrypt.compareSync(req.body.password, userDoc.password)
         if (isValidUser) {
             //signing jwt & issuing token cookie
-            const token = jwt.sign({email:userDoc.email}, JWT_SECRET,{})
+            const token = jwt.sign({email:userDoc.email, id: userDoc._id}, JWT_SECRET,{})
             res.cookie("token", token).status(200).json({"msg":"User valid and token issued"})
             
 
