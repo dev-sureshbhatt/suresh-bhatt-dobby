@@ -11,7 +11,7 @@ import UserContext from '../context/UserContext'
 function IndexPage() {
   const {validEmail} = useContext(UserContext)
 
-  console.log("valid email is", validEmail)
+  
   return (
     <div>
       {validEmail ? (<Images />) : (<Login />)  }

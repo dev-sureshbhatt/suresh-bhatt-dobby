@@ -6,7 +6,7 @@ const imageSchema = new mongoose.Schema({
     extension: {type: String},
     path: {type:String},
     owner: {type: mongoose.Schema.Types.ObjectId, ref:'user'}
-})
+}, {timestamps: true})
 
 
 const IMAGE = new mongoose.model('image', imageSchema)

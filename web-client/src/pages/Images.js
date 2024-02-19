@@ -21,7 +21,7 @@ function Images() {
             }
 
             response.json().then((response) => {
-                console.log(response)
+                // console.log(response)
                 setImages(response)
             }).catch(err => console.log(err))
 
@@ -32,7 +32,7 @@ function Images() {
 
 
 
-    console.log(images)
+    
 
     return (
         <div className='container'>

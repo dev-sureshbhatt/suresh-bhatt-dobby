@@ -15,7 +15,7 @@ function Header() {
     fetch('http://localhost:4000/profile', {
       credentials: 'include'
     }).then(response => response.json().then((userInfo) => {
-      console.log("user info  is", userInfo.userInfo.email)
+      // console.log("user info  is", userInfo.userInfo.email)
       setValidUserInfo(userInfo.userInfo); setValidEmail(userInfo.userInfo.email)}).catch(err=>console.log(err)))
     .catch(err => console.log(err))
 

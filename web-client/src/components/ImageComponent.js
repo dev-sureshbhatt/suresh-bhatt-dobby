@@ -19,10 +19,6 @@ function handleEdit(){
   .then(response => setEditTitle(false))
   .catch(err => alert('something went wrong'))
 
-
-
-  console.log("I have to handle edits now for image", image._id)
-  console.log("old title was", image.title, "new title is", title)
 }
 
 
