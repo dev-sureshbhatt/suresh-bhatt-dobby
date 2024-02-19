@@ -96,7 +96,7 @@ app.post('/login', async (req, res) => {
         const userDoc = await USER.findOne({ email: req.body.email })
 
         if (!userDoc) {
-            res.status(400).cookie("token", "").json({ "msg": "no user exist" })
+            res.status(400).cookie("token", "", {sameSite:'none', httpOnly:true, Secure: true}).json({ "msg": "no user exist" })
         }
         else if (userDoc) {
             //verifying hash
@@ -104,11 +104,11 @@ app.post('/login', async (req, res) => {
             if (isValidUser) {
                 //signing jwt & issuing token cookie
                 const token = jwt.sign({ email: userDoc.email, id: userDoc._id }, JWT_SECRET, {})
-                res.cookie("token", token, {SameSite:'none', httpOnly:true, Secure: false}).status(200).json({ "msg": "User valid and token issued", "userInfo": userDoc})
+                res.cookie("token", token, {sameSite:'none', httpOnly:true, Secure: true}).status(200).json({ "msg": "User valid and token issued", "userInfo": userDoc})
 
 
             }
-            else res.cookie("token", "", {SameSite:'none', httpOnly: true, Secure: false}).status(400).json({ "msg": "invalid credentials" })
+            else res.cookie("token", "", {sameSite:'none', httpOnly: true, secure: false}).status(400).json({ "msg": "invalid credentials" })
         }
 
 
