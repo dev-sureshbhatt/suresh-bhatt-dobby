@@ -21,7 +21,7 @@ function handleSubmit(ev){
       body: data,
       credentials: "include"
     })
-    .then((response)=>{
+    .then((response)=>{ 
       response.json().then((msg)=>alert(msg.msg)).catch(err => alert("something went wrong, please try again"))
     })
     .catch(err => alert("something went wrong, please try again"))
