@@ -4,6 +4,7 @@ import ImageComponent from '../components/ImageComponent'
 function Images() {
 
     const [images, setImages] = useState([{}])
+    const [search, setSearch] = useState('')
 
 
     //for fetching all images when the page component mounts 
@@ -34,10 +35,13 @@ function Images() {
 
   return (
     <div>
+<input value={search} onChange={(ev)=>setSearch(ev.target.value)} placeholder='Search by Image Title...'></input>
 
 {
-    images.map(image=> 
-        <ImageComponent {...image}/>
+    images
+    .filter(image => image.title.toLowerCase().includes(search))
+    .map(image=> 
+        <ImageComponent key={image._id} {...image}/>
     )
 }
 
