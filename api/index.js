@@ -34,7 +34,7 @@ const app = express()
 //middlewares
 
 app.use(express.json())
-app.use(cors({ credentials: true, origin: 'https://suresh-bhatt-dobby.netlify.app/' }))
+app.use(cors({ credentials: true, origin: 'https://suresh-bhatt-dobby.netlify.app' }))
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser({SameSite: 'none', Secure: true, httpOnly: true}))
 app.use('/uploads', express.static(__dirname + '/uploads')) // for serving images on GET fetch
