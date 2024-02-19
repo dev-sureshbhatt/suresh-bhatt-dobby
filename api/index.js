@@ -36,7 +36,7 @@ const app = express()
 app.use(express.json())
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser({sameSite: none, secure: true}))
+app.use(cookieParser({sameSite: 'none', secure: true}))
 app.use('/uploads', express.static(__dirname + '/uploads')) // for serving images on GET fetch
 
 
