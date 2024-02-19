@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 require('dotenv').config()
+const fs = require('fs') // file system to rename image files with respective file extension - as done in /upload route 
 
 //models
 const { USER } = require('./models/userModel.js')
@@ -21,7 +22,7 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 //for file upload
 const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const upload = multer({ dest: 'uploads' })
 
 
 //server initialization
@@ -155,22 +156,33 @@ app.post('/upload', upload.array('files'), async (req, res) => {
                 for (let i = 0; i < files.length; i++) {
 
                     const path = files[i]
+                    console.log(path)
+                    
+                    
                     const name = path.originalname
                     const nameArr = name.split(".")
                     const fileExtension = nameArr[nameArr.length -1]
                     // const fileNameArr = nameArr.splice(0,-1) 
                     const fileNameArr = nameArr.slice(0,-1)
-                    console.log(fileNameArr)
+                    // console.log(fileNameArr)
                     const fileName = fileNameArr.join(' ')
-                    console.log(fileName)
+                    // console.log(fileName)
                     
                     // console.log(name, fileExtension)
 
 
+                    // to add file extensions in upload directory image files respectively
+                    const uploadedFilePath = path.filename
+                    const finalFilePath = "uploads" + '/' +uploadedFilePath + '.' + fileExtension
+                    // console.log(path.path)
+                    fs.renameSync(path.path, finalFilePath) 
+
+                    
 
                     await IMAGE.create({
+                        filename: req.files[i].originalname,
                         path: req.files[i].path, 
-                        title: req.files[i].originalname, 
+                        title: fileName, 
                         owner: info.id, // stores id (user db object id) fetched from JWT token data
                         extension: fileExtension
                     })
