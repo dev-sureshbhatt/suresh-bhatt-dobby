@@ -18,9 +18,14 @@ function handleSubmit(ev){
 
     fetch('http://localhost:4000/upload', {
       method: 'POST',
-      body: data
+      body: data,
+      credentials: "include"
     })
-    console.log(files)
+    .then((response)=>{
+      response.json().then((msg)=>alert(msg.msg)).catch(err => alert("something went wrong, please try again"))
+    })
+    .catch(err => alert("something went wrong, please try again"))
+    
 
 }
 

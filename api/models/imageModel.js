@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const imageSchema = new mongoose.Schema({
     title: {type: String},
     path: {type:String},
+    owner: {type: mongoose.Schema.Types.ObjectId, ref:'user'}
 })
 
 
