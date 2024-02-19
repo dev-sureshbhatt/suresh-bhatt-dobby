@@ -36,7 +36,7 @@ const app = express()
 app.use(express.json())
 app.use(cors({ credentials: true, origin: 'https://suresh-bhatt-dobby.netlify.app' }))
 app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser({SameSite: 'none', Secure: true, httpOnly: true}))
+app.use(cookieParser({sameSite: 'none', Secure: true, httpOnly: true}))
 app.use('/uploads', express.static(__dirname + '/uploads')) // for serving images on GET fetch
 
 
@@ -96,7 +96,7 @@ app.post('/login', async (req, res) => {
         const userDoc = await USER.findOne({ email: req.body.email })
 
         if (!userDoc) {
-            res.status(400).cookie("token", "", {sameSite:'none', httpOnly:true, Secure: true}).json({ "msg": "no user exist" })
+            res.status(400).cookie("token", "", {sameSite:'none', httpOnly:true, secure: true}).json({ "msg": "no user exist" })
         }
         else if (userDoc) {
             //verifying hash
@@ -104,11 +104,11 @@ app.post('/login', async (req, res) => {
             if (isValidUser) {
                 //signing jwt & issuing token cookie
                 const token = jwt.sign({ email: userDoc.email, id: userDoc._id }, JWT_SECRET, {})
-                res.cookie("token", token, {sameSite:'none', httpOnly:true, Secure: true}).status(200).json({ "msg": "User valid and token issued", "userInfo": userDoc})
+                res.cookie("token", token, {sameSite:'none', httpOnly:true, secure: true}).status(200).json({ "msg": "User valid and token issued", "userInfo": userDoc})
 
 
             }
-            else res.cookie("token", "", {sameSite:'none', httpOnly: true, secure: false}).status(400).json({ "msg": "invalid credentials" })
+            else res.cookie("token", "", {sameSite:'none', httpOnly: true, secure: true}).status(400).json({ "msg": "invalid credentials" })
         }
 
 
