@@ -9,7 +9,7 @@ margin-top: 30px;
     gap: 10px
 }
 
-div.header a{
+div.header span{
     text-decoration: none;
     color: white;
 }

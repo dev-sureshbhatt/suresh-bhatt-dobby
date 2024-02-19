@@ -104,7 +104,7 @@ app.post('/login', async (req, res) => {
             if (isValidUser) {
                 //signing jwt & issuing token cookie
                 const token = jwt.sign({ email: userDoc.email, id: userDoc._id }, JWT_SECRET, {})
-                res.cookie("token", token).status(200).json({ "msg": "User valid and token issued" })
+                res.cookie("token", token).status(200).json({ "msg": "User valid and token issued", "userInfo": userDoc})
 
 
             }

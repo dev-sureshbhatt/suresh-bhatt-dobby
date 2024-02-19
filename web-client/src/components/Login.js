@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './Login.css'
+import UserContext from '../context/UserContext'
 
 function Login() {
 
-const [email, setEmail] = useState('')
+    const [email,setEmail] = useState('')
 const [password, setPassword] = useState('')
+const {validUserInfo, setValidUserInfo, validEmail, setValidEmail} = useContext(UserContext)
 
 function handleSubmit(ev){
     ev.preventDefault()
@@ -15,7 +17,7 @@ function handleSubmit(ev){
         credentials: 'include',
         headers: {'Content-Type':'application/json'}
     }).then((response)=>{
-        response.json().then((msg)=>alert(msg.msg)).catch(err => alert("something went wrong"))
+        response.json().then((userInfoDoc)=>{alert(userInfoDoc.msg); setValidUserInfo(userInfoDoc.userInfo); setValidEmail(userInfoDoc.userInfo.email)}).catch(err => alert("something went wrong"))
         
     }).catch((error)=>{
         alert("something went wrong")
