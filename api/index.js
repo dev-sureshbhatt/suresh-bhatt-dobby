@@ -104,11 +104,11 @@ app.post('/login', async (req, res) => {
             if (isValidUser) {
                 //signing jwt & issuing token cookie
                 const token = jwt.sign({ email: userDoc.email, id: userDoc._id }, JWT_SECRET, {})
-                res.cookie("token", token).status(200).json({ "msg": "User valid and token issued", "userInfo": userDoc})
+                res.cookie("token", token, {sameSite:'none'}).status(200).json({ "msg": "User valid and token issued", "userInfo": userDoc})
 
 
             }
-            else res.cookie("token", "").status(400).json({ "msg": "invalid credentials" })
+            else res.cookie("token", "", {sameSite:'none'}).status(400).json({ "msg": "invalid credentials" })
         }
 
 
