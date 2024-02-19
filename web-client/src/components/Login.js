@@ -19,10 +19,10 @@ function Login() {
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
         }).then((response) => {
-            response.json().then((userInfoDoc) => { alert(userInfoDoc.msg); setValidUserInfo(userInfoDoc.userInfo); setValidEmail(userInfoDoc.userInfo.email); setRedirect(true) }).catch(err => console.log("something went wrong"))
+            response.json().then((userInfoDoc) => { alert(userInfoDoc.msg); setValidUserInfo(userInfoDoc.userInfo); setValidEmail(userInfoDoc.userInfo.email); setRedirect(true) }).catch(err => alert("something went wrong"))
 
         }).catch((error) => {
-            console.log("something went wrong")
+            alert("something went wrong")
         })
 
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { Navigate } from 'react-router-dom'
 
 function Register() {
 
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
+const [redirect, setRedirect] = useState(false)
 
 function handleSubmit(ev){
     ev.preventDefault()
@@ -12,7 +14,7 @@ function handleSubmit(ev){
         body: JSON.stringify({email, password}),
         headers: {'Content-Type':'application/json'}
     }).then((response)=>{
-        response.json().then((msg)=>alert(msg.msg)).catch(err => alert("something went wrong"))
+        response.json().then((msg)=>{alert(msg.msg); setRedirect(true)}).catch(err => alert("something went wrong"))
         
     }).catch((error)=>{
         alert("something went wrong")
@@ -20,6 +22,9 @@ function handleSubmit(ev){
     
 }
 
+if (setRedirect) {
+    return <Navigate to={'/login'} />
+}
 
   return (
 
