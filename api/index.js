@@ -36,7 +36,7 @@ const app = express()
 app.use(express.json())
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser({SameSite: 'none'}))
+app.use(cookieParser({SameSite: 'none', Secure: false, httpOnly: true}))
 app.use('/uploads', express.static(__dirname + '/uploads')) // for serving images on GET fetch
 
 
@@ -104,11 +104,11 @@ app.post('/login', async (req, res) => {
             if (isValidUser) {
                 //signing jwt & issuing token cookie
                 const token = jwt.sign({ email: userDoc.email, id: userDoc._id }, JWT_SECRET, {})
-                res.cookie("token", token, {sameSite:'none', secure: false}).status(200).json({ "msg": "User valid and token issued", "userInfo": userDoc})
+                res.cookie("token", token, {SameSite:'none', httpOnly:true, Secure: false}).status(200).json({ "msg": "User valid and token issued", "userInfo": userDoc})
 
 
             }
-            else res.cookie("token", "", {sameSite:'none', secure: false}).status(400).json({ "msg": "invalid credentials" })
+            else res.cookie("token", "", {SameSite:'none', httpOnly: true, Secure: false}).status(400).json({ "msg": "invalid credentials" })
         }
 
 
