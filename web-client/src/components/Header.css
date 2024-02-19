@@ -1,0 +1,15 @@
+div.header{
+display: flex;
+justify-content: space-between;
+margin-top: 30px;
+}
+
+.links{
+    display: flex;
+    gap: 10px
+}
+
+div.header a{
+    text-decoration: none;
+    color: white;
+}

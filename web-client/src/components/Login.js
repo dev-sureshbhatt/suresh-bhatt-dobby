@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Login.css'
 
 function Login() {
 
@@ -27,8 +28,8 @@ function handleSubmit(ev){
 
   return (
 
-    <div>
-        <form onSubmit={handleSubmit}>
+    <div className='container'>
+        <form className='form' onSubmit={handleSubmit}>
             <input type='email' placeholder='email' value={email} onChange={(ev)=>setEmail(ev.target.value)} />
             <input type='password' placeholder='password' value={password} onChange={(ev)=>setPassword(ev.target.value)} />
             <button>Login</button>

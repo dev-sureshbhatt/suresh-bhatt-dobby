@@ -6,8 +6,6 @@ import UploadImage from '../components/UploadImage'
 function IndexPage() {
   return (
     <div>
-        <Login />
-        <Register />
         <UploadImage />
     </div>
   )

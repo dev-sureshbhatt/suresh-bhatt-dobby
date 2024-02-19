@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import {Link} from 'react-router-dom'
+import './Header.css'
 
 function Header() {
 
@@ -16,7 +18,17 @@ function Header() {
 
   return (
     <>
-    <div>Header</div>
+    <div className='header'>
+      <div className='logo'><Link to={'/'}>Dobby</Link></div>
+      <div className='links'>
+        <Link to='/login'>
+        <a>Login</a>
+        </Link>
+        <Link to='/register'>
+        <a>Register</a>
+        </Link>
+      </div>
+    </div>
     </>
   )
 }

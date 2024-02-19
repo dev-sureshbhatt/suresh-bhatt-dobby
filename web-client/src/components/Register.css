@@ -1,0 +1,26 @@
+.container{
+    text-align: center;
+    /* width: 70vw; */
+    /* padding: 100px; */
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.form{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    gap: 20px;
+}
+
+.form input{
+    font-size: 1.8em;
+}
+
+.form button{
+    font-size: 1.5em
+}

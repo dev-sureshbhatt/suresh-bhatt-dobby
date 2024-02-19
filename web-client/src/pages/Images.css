@@ -1,0 +1,15 @@
+.container{
+text-align: center;
+}
+
+.search{
+    margin-top: 30px;
+    
+}
+
+div.search input{
+    
+    font-size: 1.8em;
+    width: 70%;
+    
+}

@@ -23,8 +23,8 @@ function handleSubmit(ev){
 
   return (
 
-    <div>
-        <form onSubmit={handleSubmit}>
+    <div className='container'>
+        <form className='form' onSubmit={handleSubmit}>
             <input required type='email' placeholder='email' value={email} onChange={(ev)=>setEmail(ev.target.value)} />
             <input required type='password' placeholder='password' value={password} onChange={(ev)=>setPassword(ev.target.value)} />
             <button>Register</button>
