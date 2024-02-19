@@ -175,7 +175,19 @@ app.post('/upload', upload.array('files'), async (req,res)=>{
 //endpoint for profile authentication .
 
 app.get('/profile', (req,res)=>{
-    console.log("cookies are", req.cookies)
-    res.json({"msg": "ok"})
+    
+    try {
+        const {token} = req.cookies
+        
+        jwt.verify(token, JWT_SECRET, {}, (err, userInfo) => {
+            if (err) throw new error
+            res.json({userInfo})
+        } )
+        
+            
+    } catch (error) {
+        res.json({"msg":"invalid cookies"})
+    }
+    
 })
 
