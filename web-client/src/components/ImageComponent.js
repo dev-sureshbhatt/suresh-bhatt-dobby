@@ -15,8 +15,9 @@ function handleEdit(){
     credentials: 'include',
     body: JSON.stringify({'id': image._id, title}),
     headers: {'Content-Type': 'application/json'}
-
   })
+  .then(response => setEditTitle(false))
+  .catch(err => alert('something went wrong'))
 
 
 
