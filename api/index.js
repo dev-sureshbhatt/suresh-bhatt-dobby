@@ -252,3 +252,25 @@ app.get('/images', (req,res)=>{
         })
     }
 })
+
+
+
+
+//endpoint for updating title - patch request
+app.patch('/images', (req,res)=>{
+
+    const {token} = req.cookies
+    jwt.verify(token, JWT_SECRET, {}, async (err, info)=>{
+        if (err) {res.json({'msg':"You seems to be not authorized for this request"})}
+        if (info) {
+            const {id, title} = req.body
+            console.log("id title  is",id, title)
+            const updatedImageDoc = await IMAGE.findByIdAndUpdate(id, {title}, {new: true})
+                console.log("updated doc is", updatedImageDoc)
+                res.json(updatedImageDoc)
+        }
+    })
+    
+
+
+})

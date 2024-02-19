@@ -9,7 +9,19 @@ export default function ImageComponent({...image}) {
   const [title, setTitle] = useState(image.title)
 
 function handleEdit(){
-  console.log("I have to handle edits now")
+
+  fetch('http://localhost:4000/images', {
+    method: 'PATCH',
+    credentials: 'include',
+    body: JSON.stringify({'id': image._id, title}),
+    headers: {'Content-Type': 'application/json'}
+
+  })
+
+
+
+  console.log("I have to handle edits now for image", image._id)
+  console.log("old title was", image.title, "new title is", title)
 }
 
 
