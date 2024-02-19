@@ -140,15 +140,45 @@ app.post('/upload', upload.array('files'), async (req, res) => {
             //when cookies are valid
             if (info) {
                 const files = req.files
+                //destructuring name to get file extension so that the file can be stored with respective imagetype (png, jpg etc)
+                // console.log(files)
+                // const path = files[0]
+                // console.log(path.originalname)
+                // const name = path.originalname
+                // console.log(name)
+                // const nameArr = name.split(".")
+                // console.log(nameArr[nameArr.length -1])
+                // const fileExtension = nameArr[nameArr.length -1]
+                // console.log(name, fileExtension)
+
+                //looping throgh each files to store multiple images one by one
                 for (let i = 0; i < files.length; i++) {
+
+                    const path = files[i]
+                    const name = path.originalname
+                    const nameArr = name.split(".")
+                    const fileExtension = nameArr[nameArr.length -1]
+                    // const fileNameArr = nameArr.splice(0,-1) 
+                    const fileNameArr = nameArr.slice(0,-1)
+                    console.log(fileNameArr)
+                    const fileName = fileNameArr.join(' ')
+                    console.log(fileName)
+                    
+                    // console.log(name, fileExtension)
+
+
+
                     await IMAGE.create({
                         path: req.files[i].path, 
                         title: req.files[i].originalname, 
-                        owner: info.id // stores id (user db object id) fetched from JWT token data
+                        owner: info.id, // stores id (user db object id) fetched from JWT token data
+                        extension: fileExtension
                     })
-                    res.status(200).json({"msg":"Image(s) uploaded successfully"})
+                    // res.status(200).json({"msg":"Image(s) uploaded successfully"})
 
                 }
+
+                res.status(200).json({"msg":"Image(s) uploaded successfully"})
 
             }
         })
@@ -203,7 +233,7 @@ app.get('/images', (req,res)=>{
             if (err) {
                 res.json({"msg":"You are not authorized, please login again"})
             } else {
-                console.log(userInfo.id)
+                
                 IMAGE.find({owner: userInfo.id}).then(data => res.send(data)).catch(err => console.log(err))
             }
             
