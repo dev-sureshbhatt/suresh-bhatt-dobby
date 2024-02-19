@@ -25,18 +25,23 @@ function Images() {
 
         }))
         .catch(err => console.log(err))
-
-
-
-console.log("mounted")
     }, [])
 
 
 
 
+    console.log(images)
+
   return (
     <div>
-        <ImageComponent />
+
+{
+    images.map(image=> 
+        <ImageComponent {...image}/>
+    )
+}
+
+        
     </div>
   )
 }

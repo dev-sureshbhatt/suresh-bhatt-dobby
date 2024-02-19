@@ -37,7 +37,7 @@ app.use(express.json())
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-
+app.use('/uploads', express.static(__dirname + '/uploads')) // for serving images on GET fetch
 
 
 ///
@@ -156,7 +156,7 @@ app.post('/upload', upload.array('files'), async (req, res) => {
                 for (let i = 0; i < files.length; i++) {
 
                     const path = files[i]
-                    console.log(path)
+                    // console.log(path)
                     
                     
                     const name = path.originalname
