@@ -123,7 +123,7 @@ app.post('/login', async (req, res) => {
 
 //Logout - invalidating cookies
 app.get('/logout', (req, res) => {
-    res.status(200).clearCookie("token").json({ "msg": "You've been logged out successfully" })
+    res.status(200).clearCookie("token", {sameSite:'none', httpOnly:true, secure: true}).json({ "msg": "You've been logged out successfully" })
 })
 
 
