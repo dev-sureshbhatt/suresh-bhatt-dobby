@@ -17,12 +17,12 @@ function handleSubmit(ev){
         response.json().then((msg)=>{alert(msg.msg); setRedirect(true)}).catch(err => alert("something went wrong"))
         
     }).catch((error)=>{
-        alert("something went wrong")
+        console.log("something went wrong")
     })
     
 }
 
-if (setRedirect) {
+if (redirect) {
     return <Navigate to={'/login'} />
 }
 

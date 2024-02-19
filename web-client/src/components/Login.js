@@ -22,7 +22,7 @@ function Login() {
             response.json().then((userInfoDoc) => { alert(userInfoDoc.msg); setValidUserInfo(userInfoDoc.userInfo); setValidEmail(userInfoDoc.userInfo.email); setRedirect(true) }).catch(err => alert("something went wrong"))
 
         }).catch((error) => {
-            alert("something went wrong")
+            console.log("something went wrong")
         })
 
 
