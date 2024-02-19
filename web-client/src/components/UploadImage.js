@@ -36,7 +36,7 @@ function handleSubmit(ev){
 
   if (redirect) {
     return (
-      <Navigate to={'/images'} />
+      <Navigate to={'/'} />
     )
   }
 

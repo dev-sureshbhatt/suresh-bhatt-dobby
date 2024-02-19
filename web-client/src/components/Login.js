@@ -32,7 +32,7 @@ function Login() {
 
 
     if (redirect){
-        return <Navigate to={'/images'} />
+        return <Navigate to={'/'} />
     }
 
     return (

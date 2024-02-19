@@ -39,7 +39,7 @@ function Header() {
       <div className='links'>
 
         {
-          validEmail && (<><Link to=''><span>Upload Images</span></Link>
+          validEmail && (<><Link to='/upload'><span>Upload Images</span></Link>
           <Link to=''><span onClick={handleLogout}>Logout</span></Link></>)
         }
         {
