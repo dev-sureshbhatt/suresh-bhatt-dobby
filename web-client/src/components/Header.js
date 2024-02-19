@@ -12,7 +12,7 @@ function Header() {
 
   // to send token cookie to the /profile endpoint and get details if the user  is authenticated (if available). 
   useEffect(()=>{
-    fetch('http://localhost:4000/profile', {
+    fetch('https://suresh-bhatt-dobby.onrender.com/profile', {
       credentials: 'include'
     }).then(response => response.json().then((userInfo) => {
       // console.log("user info  is", userInfo.userInfo.email)
@@ -27,7 +27,7 @@ function Header() {
 
 
   function handleLogout(){
-    fetch('http://localhost:4000/logout', {credentials: 'include'})
+    fetch('https://suresh-bhatt-dobby.onrender.com/logout', {credentials: 'include'})
     setValidUserInfo(null)
     setValidEmail(null)
   }

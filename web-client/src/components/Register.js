@@ -7,7 +7,7 @@ const [password, setPassword] = useState('')
 
 function handleSubmit(ev){
     ev.preventDefault()
-    fetch('http://localhost:4000/register', {
+    fetch('https://suresh-bhatt-dobby.onrender.com/register', {
         method: 'POST',
         body: JSON.stringify({email, password}),
         headers: {'Content-Type':'application/json'}

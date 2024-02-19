@@ -13,16 +13,16 @@ function Login() {
     function handleSubmit(ev) {
         ev.preventDefault()
 
-        fetch('http://localhost:4000/login', {
+        fetch('https://suresh-bhatt-dobby.onrender.com/login', {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
         }).then((response) => {
-            response.json().then((userInfoDoc) => { alert(userInfoDoc.msg); setValidUserInfo(userInfoDoc.userInfo); setValidEmail(userInfoDoc.userInfo.email); setRedirect(true) }).catch(err => alert("something went wrong"))
+            response.json().then((userInfoDoc) => { alert(userInfoDoc.msg); setValidUserInfo(userInfoDoc.userInfo); setValidEmail(userInfoDoc.userInfo.email); setRedirect(true) }).catch(err => console.log("something went wrong"))
 
         }).catch((error) => {
-            alert("something went wrong")
+            console.log("something went wrong")
         })
 
 

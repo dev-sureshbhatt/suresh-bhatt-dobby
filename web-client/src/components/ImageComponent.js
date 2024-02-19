@@ -10,7 +10,7 @@ export default function ImageComponent({...image}) {
 
 function handleEdit(){
 
-  fetch('http://localhost:4000/images', {
+  fetch('https://suresh-bhatt-dobby.onrender.com/images', {
     method: 'PATCH',
     credentials: 'include',
     body: JSON.stringify({'id': image._id, title}),
@@ -29,7 +29,7 @@ function handleEdit(){
         
         {editTitle && <input value={title} onChange={(ev)=>{setTitle(ev.target.value)}}></input>}
         {editTitle ? (<button onClick={handleEdit}>Save</button>) : (<button onClick={ev => setEditTitle(true)}>Edit Title</button>) }
-        <img height="500px" width={"600px"} src={`http://localhost:4000/${image.path}.${image.extension}`} /> 
+        <img height="500px" width={"600px"} src={`https://suresh-bhatt-dobby.onrender.com/${image.path}.${image.extension}`} /> 
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ImageComponent from '../components/ImageComponent'
 import './Images.css'
 
+
 function Images() {
 
     const [images, setImages] = useState([])
@@ -12,7 +13,7 @@ function Images() {
     useEffect(() => {
 
 
-        fetch('http://localhost:4000/images', {
+        fetch('https://suresh-bhatt-dobby.onrender.com/images', {
             credentials: 'include' //for sending token to verify, authenticate and display get image belonging to the user
         }).then((response => {
 

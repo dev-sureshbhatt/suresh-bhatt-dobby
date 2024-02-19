@@ -18,7 +18,7 @@ function handleSubmit(ev){
             data.append("files", files[i]);
         }
 
-    fetch('http://localhost:4000/upload', {
+    fetch('https://suresh-bhatt-dobby.onrender.com/upload', {
       method: 'POST',
       body: data,
       credentials: "include"
