@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { Navigate } from 'react-router-dom'
 
 function UploadImage() {
 
 const [files, setFiles] = useState([])
 const [uploadedImages, setUploadedImages] = useState([])
+const [redirect, setRedirect] = useState(false)
 
 function handleSubmit(ev){
     ev.preventDefault()
@@ -21,8 +23,9 @@ function handleSubmit(ev){
       body: data,
       credentials: "include"
     })
-    .then((response)=>{ 
-      response.json().then((msg)=>alert(msg.msg)).catch(err => alert("something went wrong, please try again"))
+    .then((response)=>{
+
+      response.json().then((msg)=>{alert(msg.msg); setRedirect(true)}).catch(err => alert("something went wrong, please try again"))
     })
     .catch(err => alert("something went wrong, please try again"))
     
@@ -30,6 +33,12 @@ function handleSubmit(ev){
 }
 
 
+
+  if (redirect) {
+    return (
+      <Navigate to={'/images'} />
+    )
+  }
 
 
   return (
