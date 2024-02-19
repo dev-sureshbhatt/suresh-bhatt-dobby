@@ -196,15 +196,15 @@ app.get('/images', (req,res)=>{
     //authenticating users to find their respective images from db
     const {token} = req.cookies
     if (!token) {
-        res.status(403).json({"msg":"please register/login first"})
+        res.json({"msg":"please register/login first"})
     } else
     {
         jwt.verify(token, JWT_SECRET, {}, (err, userInfo)=>{
             if (err) {
-                res.status(403).json({"msg":"You are not authorized, please login again"})
+                res.json({"msg":"You are not authorized, please login again"})
             } else {
                 console.log(userInfo.id)
-                IMAGE.findOne({owner: userInfo.id}).then(data => res.send(data)).catch(err => console.log(err))
+                IMAGE.find({owner: userInfo.id}).then(data => res.send(data)).catch(err => console.log(err))
             }
             
         })

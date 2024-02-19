@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ImageComponent from '../components/ImageComponent'
 
 function Images() {
+
+    const [images, setImages] = useState([{}])
 
 
     //for fetching all images when the page component mounts 
@@ -16,7 +18,10 @@ function Images() {
                 alert("You seems to be not authorized, please register/login")
             }
 
-        response.json().then(response => console.log(response)).catch(err => console.log(err))
+        response.json().then((response) => {
+            console.log(response)
+            setImages(response)
+        }).catch(err => console.log(err))
 
         }))
         .catch(err => console.log(err))
